@@ -1,0 +1,4 @@
+<aura:component implements="flexipage:availableforAllPageTypes">
+    <!--<c:FranchiseHeader/>-->
+    <c:FranchiseList/>
+</aura:component>

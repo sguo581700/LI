@@ -1,0 +1,28 @@
+<aura:component controller="FranchiseListController">
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:handler name="addFranchise" event="c:addFranchiseEvent" action="{!c.handleAddFranchise}"/>
+    <aura:attribute name="items" type="Franchise__c[]"/>
+
+    <lightning:layout>
+    	<lightning:layoutItem padding="around-small" size="6">
+        	<div aria-labelledby="newFranchiseForm">
+            	<fieldset class="slds-box slds-theme--default slds-container--small">
+                   <c:FranchiseListForm/>
+                   <br></br>
+                   <legend id="newFranchiseForm" class="slds-text-heading-large slds-p-vertical--medium">
+            			Franchise List
+            		</legend>
+                    <br></br>
+                    <div class="slds-card slds-p-top--medium">
+                    	<header>
+                    		<h3 class="slds-text-heading--small">Franchises</h3>
+                    	</header>
+                		<aura:iteration items="{!v.items}" var="franc">
+                			<c:FranchiseListItem item="{!franc}"/>
+                            <br></br>
+            			</aura:iteration>
+                	</div>
+            	</fieldset></div>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

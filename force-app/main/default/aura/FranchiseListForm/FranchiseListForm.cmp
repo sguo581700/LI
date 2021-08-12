@@ -1,0 +1,61 @@
+<aura:component controller="FranchiseListController">
+   <aura:attribute name="fieldMap" type="Map"/>
+    <aura:attribute name="issueList" type="List"/>
+    <aura:attribute name="selectedList" type="List"/>
+	<aura:attribute name="newItem" type="Franchise__c"
+                    default="{'sObjectType':'Franchise__c',
+                             'Franchise_Name__c':'',
+                             'Franchise_Country__c':'',
+                             'Infrastructure_Issues__c':'',
+                             'Is_Spaghetti_Broken__c':false}"/>
+    
+    <aura:handler name="init" action="{!c.doInitList}" value="{!this}"/> <!--NEED IT-->
+    <aura:handler name="init" action="{!c.doInitMList}" value="{!this}"/> <!--NEED IT-->
+    <aura:registerEvent name="addFranchise" type="c:addFranchiseEvent"/>
+    <form class="slds-form--stacked">
+    	<lightning:input aura:id="newFranchiseForm" label="Franchise Name"
+                                 name="franchisename"
+                         		 type="Text"
+                                 value="{!v.newItem.Franchise_Name__c}"
+                                 messageWhenValueMissing="Please write a Name for your franchise"/>
+        <br></br>
+                
+        <lightning:select aura:id="franchisepicklist" 
+                              label="Country" 
+                          	  onchange="{!c.handleOnChange}" 
+                              value="{!v.newItem.Franchise_country__c}">
+                <option value="{!v.newItem.Franchise_country__c}">{!v.newItem.Franchise_country__c}</option>
+                <aura:iteration items="{!v.fieldMap}" var="i" indexVar="key">
+                    <option text="{!i.value}" value="{!i.key}" selected="{!i.selected}"/>
+                </aura:iteration>
+        </lightning:select>
+        <br></br>
+        <lightning:input type="toggle" aura:id="newFranchiseForm" label="Is Spaghetti Broken"
+                                 name="itemStatus"
+                         		 checked="{!v.newItem.Is_Spaghetti_Broken__c}"
+                                 value="{!v.newItem.Is_Spaghetti_Broken__c}"
+                         		 messageToggleActive="not operational "
+                                 messageToggleInactive=" still operational"
+                         messageWhenValueMissing="Please report status">
+        	<aura:if isTrue="{!v.newItem.Is_Spaghetti_Broken__c}">
+            </aura:if>
+        
+        
+        </lightning:input>
+        <br></br>
+        	
+        <br></br>
+        	<lightning:dualListbox aura:id="selectIssue"
+                               name="Issue"
+                               label="Select Issue"
+                               sourceLabel="Available Issues"
+                               selectedLabel="Selected Issues"
+                               options="{!v.issueList }"
+                                   onchange="{!c.handleIssueChange}" value="{!v.newItem.Infrastructure_Issues__c}"/>
+        <br></br>
+        <lightning:button label="Create Franchise" class="slds-m-top--medium"
+                          variant="brand"
+                          onclick="{!c.clickCreateFranchise}"/>
+        <br></br>
+    </form>
+</aura:component>

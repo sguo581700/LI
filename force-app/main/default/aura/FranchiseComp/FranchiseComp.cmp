@@ -1,0 +1,36 @@
+<aura:component controller="FranchiseController"> 
+    <aura:attribute name="franchises" type="Franchise__c[]"/>
+    <div class="slds-box">
+    	<div class="slds-text-heading_large">My Existing Franchise</div>
+        <br/>
+      <!--  <lightning:accordion aura:id="accordion">
+            <aura:iteration items="{!v.franchises}" var="f">  
+            	<lightning:accordionSection label ="{!f.Franchise_Name__c}">
+                    <c:FranchiseCompItem franchiseName="{!f.Franchise_Name__c}"/>
+                </lightning:accordionSection>
+                <lightning:accordionSection label ="{!f.Franchise_country__c}">
+                     <c:FranchiseCompItem franchiseCountry="{!f.Franchise_country__c}"/>
+                </lightning:accordionSection>
+                 <lightning:accordionSection label ="{!f.Is_Spaghetti_Broken__c}">
+                    <c:FranchiseCompItem urgency="{!f.Is_Spaghetti_Broken__c}"/>
+                </lightning:accordionSection>
+            </aura:iteration>
+        </lightning:accordion> -->
+        <lightning:accordion>
+            <aura:iteration items="{!v.franchises}" var="f">
+            	<lightning:accordionSection name="{!f.Name}" label="{!f.Name}">
+                	<aura:set attribute="body">
+                    	 <p><b>Franchise Name</b> : {!f.Franchise_Name__c}</p>
+                    	 <p><b>Franchise Country</b> : {!f.Franchise_country__c}</p>
+                         <p><b>Is Spaghetti broken</b> : {!f.Is_Spaghetti_Broken__c}</p>
+                        <aura:if isTrue="{!f.Is_Spaghetti_Broken__c}">
+                        	<p><b>Infrastructure issues</b> : {!f.Infrastructure_Issues__c}</p>
+                        </aura:if>
+                    </aura:set>
+                </lightning:accordionSection>
+            </aura:iteration>
+        </lightning:accordion>
+        
+    </div>
+    <lightning:button label="Get existing franchise" onclick="{!c.getFranchises}"/> <!--THIS IS JS CONTROLLER SIGNATURE!!!-->
+</aura:component>

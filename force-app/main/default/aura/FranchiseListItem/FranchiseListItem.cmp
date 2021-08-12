@@ -1,0 +1,10 @@
+<aura:component>
+    <aura:attribute name="item" type="Franchise__c"/>
+    <p>Franchise Name: {!v.item.Franchise_Name__c}</p>
+    <p>Franchise Country: {!v.item.Franchise_country__c}</p>
+    <p>Infrastructure Issues: {!v.item.Infrastructure_Issues__c}</p>
+    <p>Is Spaghetti Broken: {!v.item.Is_Spaghetti_Broken__c}</p>
+    <aura:if isTrue="{!v.item.Is_Spaghetti_Broken__c}">
+    	<c:caseComponent></c:caseComponent>
+    </aura:if>
+</aura:component>

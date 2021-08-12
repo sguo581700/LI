@@ -1,0 +1,14 @@
+<aura:component >
+    <aura:attribute name ="franchiseName" type="String"/>
+    <div>
+    	{!franchiseName}
+    </div>
+    <aura:attribute name ="franchiseCountry" type="String"/>
+    <div>
+    	{!franchiseCountry}
+    </div>   
+    <aura:attribute name ="urgency" type="Boolean"/>
+    <div>
+    	{!urgency}
+    </div>    
+</aura:component>
